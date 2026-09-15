@@ -26,11 +26,8 @@ pipeline {
             }
             steps {
                 sh "docker build -t nodemain:v1.0 ."
-
-
                 sh "docker rm -f nodemain-app || true"
-
-                sh "docker run -d --expose 3000 -p 3000:3000 nodemain:v1.0"
+                sh "docker run -d --name nodemain-app -p 3000:3000 nodemain:v1.0"
             }
         }
 
@@ -41,10 +38,8 @@ pipeline {
             }
             steps {
                 sh "docker build -t nodedev:v1.0 ."
-
                 sh "docker rm -f nodedev-app || true"
-
-                sh "docker run -d --expose 3001 -p 3001:3000 nodedev:v1.0."
+                sh "docker run -d --name nodedev-app -p 3001:3000 nodedev:v1.0"
             }
         }
     }
