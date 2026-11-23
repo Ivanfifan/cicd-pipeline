@@ -16,10 +16,10 @@ pipeline {
                 script {
                     def gitInfo = checkout scm
 
-                    if (gitInfo.GIT_BRANCH == 'origin/main') {
+                    if (gitInfo.GIT_BRANCH == 'main') {
                         env.APP_NAME = 'nodemain'
                         env.APP_PORT = '3000'
-                    } else if (gitInfo.GIT_BRANCH == 'origin/dev') {
+                    } else if (gitInfo.GIT_BRANCH == 'dev') {
                         env.APP_NAME = 'nodedev'
                         env.APP_PORT = '3001'
                     } else {
