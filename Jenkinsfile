@@ -36,15 +36,19 @@ pipeline {
         }
 
         stage('Test') {
-                    steps {
-                        sh 'npm test'
-                    }
-                }
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage("Build") {
+            steps {
+                sh 'docker build -t "${APP_NAME}:v1.0" .'
+            }
+        }
 
         stage('Deploy') {
             steps {
-                sh 'docker build -t "${APP_NAME}:v1.0" .'
-
                 sh '''
                     if docker container inspect "$APP_NAME" > /dev/null 2>&1; then
                         docker stop "$APP_NAME"
